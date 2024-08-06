@@ -21,7 +21,7 @@ public class BillingSystem {
 
                         System.out.println("Enter number of items: ");
                         int numberOfItems = sc.nextInt();
-                        int[] items = new int[numberOfItems];
+                        double[] items = new double[numberOfItems];
                         System.out.println("Now enter the prices of " + numberOfItems + " T-shirts:");
                         double price = 0;
                         for (int i = 0; i < numberOfItems; i++) {
@@ -48,14 +48,14 @@ public class BillingSystem {
                         int discountPercentage = sc.nextInt();
                         if (answer2.equalsIgnoreCase("yes")){
                             System.out.println("Enter discount percentage: ");
-                            price = price - discountPercentage * price ;
+                            price = price - (discountPercentage/100) * price ;
                         } else if (answer2.equalsIgnoreCase("no")){
                             System.out.println("Then no need to apply discount.");
                         } else {
                             System.out.println("Invalid input.");
                         }
 
-
+                        System.out.println("The final price is: " + price);
 
                         break;
                     } else if (password.equalsIgnoreCase("quit")) {
