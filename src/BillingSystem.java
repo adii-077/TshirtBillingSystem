@@ -7,6 +7,9 @@ public class BillingSystem {
         double price = 0;
         int check = 0;
         int check1 = 0;
+        int quitInItemValue = 0;
+        int quitInVAT = 0;
+        int priceInt;
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to the T-shirt Store Billing System!");
         System.out.println("You can exit by entering 'quit'.");
@@ -35,7 +38,7 @@ public class BillingSystem {
                                 String itemValue = sc.nextLine();
                                 if (itemValue.equalsIgnoreCase("quit")){
                                     System.out.println("Please visit again. Thank You!");
-                                    check = 1;
+                                    quitInItemValue = 1;
                                     break;
                                 } else if (!itemValue.equalsIgnoreCase("quit")){
                                     double price1 = Double.parseDouble(itemValue);
@@ -44,7 +47,6 @@ public class BillingSystem {
                                 } else {
                                     System.out.println("Invalid Input!");
                                 }
-//                            break;
                             }
                         } else {
                             System.out.println("Invalid Input!");
@@ -57,14 +59,16 @@ public class BillingSystem {
 
 
 
-                        System.out.println("Do you want to apply VAT (13%) (yes/no) ? :");
+                        if (quitInItemValue != 1 ){
+                            System.out.println("Do you want to apply VAT (13%) (yes/no) ? :");
+                        }
                         while(true) {
-                            if (check == 1) {
+                            if (quitInItemValue == 1) {
                                 break;
                             } else {
                                 String answerForVAT = sc.nextLine();
                                 if (answerForVAT.equalsIgnoreCase("quit")) {
-                                    check1 = 1;
+                                    quitInVAT = 1;
                                     System.out.println("Please visit again. Thank You!");
                                     break;
                                 } else if (answerForVAT.equalsIgnoreCase("yes")) {
@@ -84,11 +88,16 @@ public class BillingSystem {
 
 
 
-                        System.out.println("Do you want to apply some discount? (yes/no):");
+                        if (quitInItemValue == 1 || quitInVAT == 1){
+                            break;
+                        } else {
+                            System.out.println("Do you want to apply some discount? (yes/no):");
+                        }
                         while(true) {
-                            if (check == 1 && check1 == 1) {
+                            if (quitInItemValue == 1 || quitInVAT == 1) {
                                 break;
                             } else {
+
                                 String answer2 = sc.nextLine();
                                 if (answer2.equalsIgnoreCase("quit")) {
                                     System.out.println("Please visit again. Thank You!");
@@ -97,6 +106,7 @@ public class BillingSystem {
                                     System.out.println("Enter discount percentage: ");
                                     int discountPercentage = sc.nextInt();
                                     price = price - discountPercentage * 0.01 * price;
+                                    priceInt = (int)price;
                                     break;
                                 } else if (answer2.equalsIgnoreCase("no")) {
                                     System.out.println("Then no need to apply discount.");
@@ -109,7 +119,74 @@ public class BillingSystem {
                         }
 
 
-                        System.out.println("The final price is: " + price);
+                        priceInt = (int)price;
+                        if (price!=0){
+                            System.out.println("The final price is: " + price);
+                            System.out.println("price in Integer is: " + priceInt);
+                            System.out.println("Enter the amount you want to pay:");
+                            String amountStr = sc.nextLine();
+                            if (amountStr.equalsIgnoreCase("quit")){
+                                System.out.println("Please visit again. Thank You!");
+                                break;
+                            } else if (!amountStr.equalsIgnoreCase("quit")){
+                                int amountEntered = Integer.parseInt(amountStr);
+                                int amount = amountEntered - priceInt;
+                                int[] notes = {1000, 500, 100, 50, 20, 10, 5, 1};
+
+                                System.out.println("The change should be given in the following manner:");
+
+                                int count = amount / notes[0];
+                                if (count > 0) {
+                                    System.out.println(notes[0] + " x " + count);
+                                }
+                                amount = amount % notes[0];
+
+                                int count1 = amount / notes[1];
+                                if (count1 > 0) {
+                                    System.out.println(notes[1] + " x " + count1);
+                                }
+                                amount = amount % notes[1];
+
+                                int count2 = amount / notes[2];
+                                if (count2 > 0) {
+                                    System.out.println(notes[2] + " x " + count2);
+                                }
+                                amount = amount % notes[2];
+
+                                int count3 = amount / notes[3];
+                                if (count3 > 0) {
+                                    System.out.println(notes[3] + " x " + count3);
+                                }
+                                amount = amount % notes[3];
+
+                                int count4 = amount / notes[4];
+                                if (count4 > 0) {
+                                    System.out.println(notes[4] + " x " + count4);
+                                }
+                                amount = amount % notes[4];
+
+                                int count5 = amount / notes[5];
+                                if (count5 > 0) {
+                                    System.out.println(notes[5] + " x " + count5);
+                                }
+                                amount = amount % notes[5];
+
+                                int count6 = amount / notes[6];
+                                if (count6 > 0) {
+                                    System.out.println(notes[6] + " x " + count6);
+                                }
+                                amount = amount % notes[6];
+
+                                int count7 = amount / notes[7];
+                                if (count7 > 0) {
+                                    System.out.println(notes[7] + " x " + count7);
+                                }
+                            } else {
+                                System.out.println("Invalid Input!");
+                            }
+
+                        }
+
                         break;
                     } else if (password.equalsIgnoreCase("quit")) {
                         System.out.println("Please visit again. Thank You!");
